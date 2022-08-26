@@ -10,6 +10,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
+import Register from "./Register";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -162,9 +163,9 @@ function App() {
   }
 
   return (
-    <Switch>
-      <Route exact path="/">
-        <div className="page">
+    <div className="page">
+      <Switch>
+        <Route exact path="/">
           <CurrentUserContext.Provider value={currentUser}>
             <Header />
             <Main 
@@ -208,15 +209,15 @@ function App() {
               onClose = {() => setSelectCard({isOpen: false, card: {}})}
             />
           </CurrentUserContext.Provider>
-        </div>
-      </Route>
-      <Route path="/sign-up">
-
-      </Route>
-      <Route path="/sign-in">
+        </Route>
+        <Route path="/sign-up">
+          <Register />
+        </Route>
+        <Route path="/sign-in">
         
         </Route>
-    </Switch>
+      </Switch>
+    </div>
   );
 }
 
