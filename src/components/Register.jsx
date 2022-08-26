@@ -5,7 +5,7 @@ import SignUp from "./SignUp";
 const Register = () => {
   return(
     <>
-      <Header />
+      <Header linkTitle="Войти" link="/sign-in"/>
       <SignUp title="Регистрация" isValid={true} titleBtn="Зарегистрироваться" isLogin={false}/>
     </>
   )

@@ -5,7 +5,7 @@ import SignUp from "./SignUp";
 const Login = () => {
   return(
     <>
-      <Header />
+      <Header linkTitle="Регистрация" link="/sign-up"/>
       <SignUp title="Вход" isValid={true} titleBtn="Войти" isLogin={true}/>
     </>
   )

@@ -1,9 +1,9 @@
-.sign-up__link {
+.link {
   color: #fff;
   text-decoration: none;
   transition: 0.5s;
 }
 
-.sign-up__link:hover {
+.link:hover {
   opacity: 0.6;
 }

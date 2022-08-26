@@ -32,7 +32,7 @@ const SignUp = ({title, isValid, titleBtn, isLogin}) => {
         >
           {titleBtn}
         </button>
-        {!isLogin && <p className="sign-up__description">Уже зарегистрированы? <Link to="/sign-in" className="sign-up__link">Войти</Link></p>}
+        {!isLogin && <p className="sign-up__description">Уже зарегистрированы? <Link to="/sign-in" className="link">Войти</Link></p>}
       </form>
     </div>
   )
