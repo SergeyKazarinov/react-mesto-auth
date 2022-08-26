@@ -11,6 +11,7 @@ import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
 import Register from "./Register";
+import Login from "./Login";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -214,7 +215,7 @@ function App() {
           <Register />
         </Route>
         <Route path="/sign-in">
-        
+          <Login />
         </Route>
       </Switch>
     </div>

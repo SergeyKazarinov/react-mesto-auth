@@ -1,13 +1,12 @@
 import React from "react";
-import FieldSet from "./Fieldset";
 import Header from "./Header";
-import SingIn from "./SingIn";
+import SignUp from "./SignUp";
 
 const Register = () => {
   return(
     <>
-    <Header />
-    <SingIn title="Регистрация" isValid={true} titleBtn="Зарегистрироваться"/>
+      <Header />
+      <SignUp title="Регистрация" isValid={true} titleBtn="Зарегистрироваться" isLogin={false}/>
     </>
   )
 }

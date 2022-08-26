@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import FieldSet from "./Fieldset";
 
-const SingIn = ({title, isValid, titleBtn}) => {
+const SignUp = ({title, isValid, titleBtn, isLogin}) => {
   return(
     <div className="sign-up__container">
       <h2 className="form__title">{title}</h2>
@@ -24,19 +25,17 @@ const SingIn = ({title, isValid, titleBtn}) => {
           maxLength="50"
         />
         <button
-          className={`button button_type_authorization ${
-            !isValid && "button_inactive"
-          }`}
+          className={`button button_type_authorization ${!isValid && "button_inactive"} ${isLogin && "button_type_login"}`}
           value={titleBtn}
           id="button-save"
           disabled={!isValid ? true : false}
         >
           {titleBtn}
         </button>
-        <p className="sign-up__description">Уже зарегистрированы? <a className="sign-up__link" href="#">Войти</a></p>
+        {!isLogin && <p className="sign-up__description">Уже зарегистрированы? <Link to="/sign-in" className="sign-up__link">Войти</Link></p>}
       </form>
     </div>
   )
 }
 
-export default SingIn;
+export default SignUp;
