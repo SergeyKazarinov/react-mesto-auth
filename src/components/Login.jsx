@@ -6,7 +6,7 @@ const Login = ({onLogIn}) => {
   return(
     <>
       <Header linkTitle="Регистрация" link="/sign-up"/>
-      <SignUp title="Вход" isValid={true} titleBtn="Войти" isLogin={true} onSubmit={onLogIn} />
+      <SignUp title="Вход" titleBtn="Войти" isLogin={true} onSubmit={onLogIn} />
     </>
   )
 }

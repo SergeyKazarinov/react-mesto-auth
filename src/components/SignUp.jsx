@@ -1,11 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FieldSet from "./Fieldset";
 
 
-const SignUp = ({title, isValid, titleBtn, isLogin, onSubmit }) => {
+const SignUp = ({title, titleBtn, isLogin, onSubmit }) => {
   const userEmail = useRef();
   const userPassword = useRef();
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isButtonValid, setIsButtonValid] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +18,28 @@ const SignUp = ({title, isValid, titleBtn, isLogin, onSubmit }) => {
       password: userPassword.current.value
     })
   }
+
+  function handleEmailChange() {
+    if(userEmail.current.validity.valid) {
+      setIsEmailValid(true);
+    }
+    else {
+      setIsEmailValid(false);
+    }
+  }
+
+  function handlePasswordChange() {
+    if(userPassword.current.validity.valid) {
+      setIsPasswordValid(true);
+    }
+    else {
+      setIsPasswordValid(false);
+    }
+  }
+
+  useEffect(() => {
+    setIsButtonValid(isEmailValid && isPasswordValid);
+}, [isEmailValid, isPasswordValid])
 
   return(
     <div className="sign-up__container">
@@ -28,6 +53,7 @@ const SignUp = ({title, isValid, titleBtn, isLogin, onSubmit }) => {
           minLength="2"
           maxLength="40"
           inputRef={userEmail}
+          onChange={handleEmailChange}
         />
 
         <FieldSet 
@@ -38,12 +64,13 @@ const SignUp = ({title, isValid, titleBtn, isLogin, onSubmit }) => {
           minLength="8"
           maxLength="50"
           inputRef={userPassword}
+          onChange={handlePasswordChange}
         />
         <button
-          className={`button button_type_authorization ${!isValid && "button_inactive"} ${isLogin && "button_type_login"}`}
+          className={`button button_type_authorization ${!isButtonValid && "button_inactive"} ${isLogin && "button_type_login"}`}
           value={titleBtn}
           id="button-save"
-          disabled={!isValid ? true : false}
+          disabled={!isButtonValid ? true : false}
         >
           {titleBtn}
         </button>

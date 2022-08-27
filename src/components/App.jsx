@@ -30,7 +30,6 @@ function App({history}) {
   const [userEmail, setUserEmail] = useState('');
   const [isRegistration, setIsRegistration] = useState(false);
 
-
   useEffect(() => {
     api.getUserInfo()
       .then((res) => {
@@ -49,23 +48,24 @@ function App({history}) {
     });
     const token = localStorage.getItem('token');
     if (token) {
-      const getUserEmail = async (token) => {
-        try{
-          const res = await getUserData(token);
-          if(res.data.email) {
-            setUserEmail(res.data.email)
-            setLoggedIn(true);
-            history.push('/')
-          } else {
-            setLoggedIn(false);
-          }
-        } catch {
-          console.error("Ошибка");
-        }
-      }
       getUserEmail(token);
     }
   }, []);
+
+  const getUserEmail = async (token) => {
+    try{
+      const res = await getUserData(token);
+      if(res.data.email) {
+        setUserEmail(res.data.email)
+        setLoggedIn(true);
+        history.push('/')
+      } else {
+        setLoggedIn(false);
+      }
+    } catch {
+      console.error("Ошибка");
+    }
+  }
 
   function handleEscClose(e) {
     e.key === "Escape" && closeAllPopups();
@@ -196,6 +196,7 @@ function App({history}) {
       if(res.token) {
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
+        getUserEmail(res.token);
         history.push('/');
       } else return;
     } catch {
