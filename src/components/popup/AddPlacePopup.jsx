@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
-import FieldSet from "./Fieldset";
+import FieldSet from "../Fieldset";
 
 function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const linkInputRef = useRef();

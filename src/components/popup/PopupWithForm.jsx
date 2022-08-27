@@ -1,6 +1,6 @@
 import React from "react";
 
-function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubmit, isValid, card}) {
+function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubmit, isValid}) {
   function handleCLoseOverlayClick(e) {
     if(e.target === e.currentTarget) {
       onClose();

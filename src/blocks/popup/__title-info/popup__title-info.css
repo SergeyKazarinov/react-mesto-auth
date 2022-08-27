@@ -1,4 +1,4 @@
-.popup__title {
+.popup__title-info {
   max-height: 23px;
   margin: 0;
   margin-bottom: 54px;
@@ -10,11 +10,10 @@
 }
 
 @media screen and (max-width: 540px) {
-  .popup__title {
+  .popup__title-info {
     max-height: 22px;
-    margin-bottom: 74px;
+    margin-bottom: 25px;
     font-size: 18px;
     line-height: 22px;
-    /* text-align: center; */
   }
 }
