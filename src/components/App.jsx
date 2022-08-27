@@ -227,7 +227,7 @@ function App({history}) {
             exact path="/" 
             loggedIn={loggedIn} 
           >
-            <Header linkTitle="Выйти" link="/sign-in" onSignOut={handleSignOut} email={userEmail}/>
+            <Header linkTitle="Выйти" link="/sign-in" onSignOut={handleSignOut} email={userEmail} loggedIn={loggedIn}/>
             <Main 
                 onEditProfile={handleEditProfileClick} 
                 onAddPlace={handleAddPlaceClick} 
@@ -240,10 +240,10 @@ function App({history}) {
             <Footer />
           </ProtectedRoute>
           <Route path="/sign-up">
-            <Register onRegistration={handleRegistration}/>
+            <Register onRegistration={handleRegistration} loggedIn={loggedIn}/>
           </Route>
           <Route path="/sign-in">
-            <Login onLogIn={handleSignIn} />
+            <Login onLogIn={handleSignIn} loggedIn={loggedIn}/>
           </Route>
         </Switch>
 
