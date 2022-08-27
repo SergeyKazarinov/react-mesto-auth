@@ -2,11 +2,12 @@ import React from "react";
 import Header from "./Header";
 import SignUp from "./SignUp";
 
-const Register = () => {
+const Register = ({onRegistration}) => {
+
   return(
     <>
       <Header linkTitle="Войти" link="/sign-in"/>
-      <SignUp title="Регистрация" isValid={true} titleBtn="Зарегистрироваться" isLogin={false}/>
+      <SignUp title="Регистрация" isValid={true} titleBtn="Зарегистрироваться" isLogin={false} onSubmit={onRegistration} />
     </>
   )
 }

@@ -19,7 +19,7 @@ function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLen
       setErrorMessage('');
     }
 
-    onChange(e);
+    // onChange(e);
   }
 
   return(
