@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { Route, Switch } from 'react-router-dom';
 import Footer from "./Footer";
 import Header from "./Header";
 import ImagePopup from "./ImagePopup";
@@ -10,8 +9,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
-import Register from "./Register";
-import Login from "./Login";
+
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -164,9 +162,6 @@ function App() {
   }
 
   return (
-    <div className="page">
-      <Switch>
-        <Route exact path="/">
           <CurrentUserContext.Provider value={currentUser}>
             <Header />
             <Main 
@@ -210,15 +205,6 @@ function App() {
               onClose = {() => setSelectCard({isOpen: false, card: {}})}
             />
           </CurrentUserContext.Provider>
-        </Route>
-        <Route path="/sign-up">
-          <Register />
-        </Route>
-        <Route path="/sign-in">
-          <Login />
-        </Route>
-      </Switch>
-    </div>
   );
 }
 
