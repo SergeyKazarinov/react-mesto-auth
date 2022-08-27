@@ -22,7 +22,7 @@ const InfoTooltip = ({name, isOpen, onClose, isRegistration }) => {
           aria-label="Закрыть окно"
         />
         <img src={isRegistration ? AcceptRegist : RejectRegist} className="popup__union" alt="Значок галочки" />
-        <h2 className="popup__title">{isRegistration ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."}</h2>
+        <h2 className="popup__title-info">{isRegistration ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."}</h2>
       </div>
     </div>
   );
