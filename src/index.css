@@ -70,7 +70,9 @@
 @import url(./blocks/popup/_type/popup_type_add-image.css);
 @import url(./blocks/popup/_opened/popup_opened.css);
 @import url(./blocks/popup/__image/popup__image.css);
+@import url(./blocks/popup/__union/popup__union.css);
 @import url(./blocks/popup/__container/popup__container.css);
+@import url(./blocks/popup/__container-info/popup__container-info.css);
 @import url(./blocks/popup/__title/popup__title.css);
 @import url(./blocks/popup/__title/_type/popup__title_type_delete.css);
 @import url(./blocks/popup/__container-image/popup__container-image.css);

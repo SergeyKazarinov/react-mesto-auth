@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from './components/Register';
 import Login from './components/Login';
+import InfoTooltip from './components/popup/InfoTooltip';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
         <ProtectedRoute exact path="/" loggedIn={true} component={App} />
         <Route path="/sign-up">
           <Register />
+          <InfoTooltip name="info" isOpen={false} isRegistration={true}/>
         </Route>
         <Route path="/sign-in">
           <Login />
