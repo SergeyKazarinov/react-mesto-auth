@@ -1,11 +1,14 @@
-.page {
+:root {
   background-color: #000;
+}
+.page {
+  background: #000;
   min-width: 320px;
   max-width: 1280px;
   padding: 45px 200px 60px;
   box-sizing: border-box;
   color: #fff;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   font-weight: 400;
   margin: 0 auto;
 }
@@ -24,6 +27,7 @@
 
 @media screen and (max-width: 540px) {
   .page {
-    padding: 28px 0 36px;
+    padding: 0 0 36px;
+    margin-top: 28px;
   }
 }

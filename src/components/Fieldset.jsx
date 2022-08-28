@@ -26,7 +26,7 @@ function FieldSet({inputType, inputClassType, placeholder, id, minLength, maxLen
     <fieldset className="form__set">
         <input 
           type={inputType}
-          className={`form__input form__input_type_${inputClassType} ${isValid && 'form__input_type_error'}`}
+          className={`form__input_type_${inputClassType} form__input  ${isValid && 'form__input_type_error'}`}
           placeholder={placeholder}
           value={value}
           id={id}
