@@ -12,7 +12,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   const [isButtonValid, setIsButtonValid] = useState (false);
   const [buttonSubmitName, setButtonSubmitName] = useState('Сохранить')
 
-  React.useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
     setIsAboutValid(true);

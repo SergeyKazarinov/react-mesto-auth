@@ -14,7 +14,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './popup/InfoTooltip';
-import { getUserData, authorize, register } from "../utils/Auth";
+import { getUserData, authorize, register } from "../utils/auth";
+import AcceptRegist from '../images/Accept-registration.png';
+import RejectRegist from '../images/rejectRegistration.png'
 
 function App({history}) {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -22,44 +24,45 @@ function App({history}) {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
-  const [selectedCard, setSelectCard] = useState({isOpen: false, card: {}});
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+  const [selectedCard, setSelectCard] = useState({});
   const [currentUser, setCurrentUser] = useState({name: '', about: ''});
   const [cards, setCards] = useState([]);
-  const [card, setCard] = useState({});
-  const [loggedIn, setLoggedIn] = useState();
+  const [cardToBeDeleted, setCardToBeDeleted] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
-  const [isRegistration, setIsRegistration] = useState(false);
+  const [imageForInfoTooltip, setImageForInfoTooltip] = useState('');
+  const [textForInfoTooltip, setTextForInfoTooltip] = useState('');
 
   useEffect(() => {
-    api.getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    api.getInitialCards()
-    .then((res) => {
-      setCards(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
     const token = localStorage.getItem('token');
     if (token) {
       getUserEmail(token);
     }
   }, []);
 
+  useEffect(() => {
+    if(loggedIn){
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userInfo, initialCards]) => {
+          setCurrentUser(userInfo);
+          setCards(initialCards);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn])
+
   const getUserEmail = async (token) => {
     try{
       const res = await getUserData(token);
       if(res.data.email) {
-        setUserEmail(res.data.email)
+        setUserEmail(res.data.email);
         setLoggedIn(true);
         history.push('/')
       } else {
+        localStorage.removeItem('token')
         setLoggedIn(false);
       }
     } catch {
@@ -67,34 +70,26 @@ function App({history}) {
     }
   }
 
-  function handleEscClose(e) {
-    e.key === "Escape" && closeAllPopups();
-  }
-
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-    window.addEventListener('keydown', handleEscClose);
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true)
-    window.addEventListener('keydown', handleEscClose);
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true)
-    window.addEventListener('keydown', handleEscClose);
   }
 
   function handleDeleteCardClick(card) {
-    setCard(card);
+    setCardToBeDeleted(card);
     setIsDeleteCardPopupOpen(true);
-    window.addEventListener('keydown', handleEscClose);
   }
 
   function handleCardClick(card) {
-    setSelectCard({isOpen: true, card: card});
-    window.addEventListener('keydown', handleEscClose);
+    setSelectCard(card);
+    setIsImagePopupOpen(true);
   }
 
   function closeAllPopups() {
@@ -103,8 +98,7 @@ function App({history}) {
     setIsAddPlacePopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
     setIsDeleteCardPopupOpen(false);
-    setSelectCard({...selectedCard, isOpen: false});
-    window.removeEventListener('keydown', handleEscClose);
+    setIsImagePopupOpen(false);
   }
 
   function handleUpdateUser(userData) {
@@ -187,22 +181,21 @@ function App({history}) {
     if(localStorage.getItem('token')) {
       localStorage.removeItem('token')
       setLoggedIn(false);
+      setUserEmail('');
     }
   }
 
   const handleSignIn = async ({email, password}) => {
     try{
       const res = await authorize(email, password);
-      if(res.token) {
-        localStorage.setItem('token', res.token);
-        setLoggedIn(true);
-        getUserEmail(res.token);
-        history.push('/');
-      } else return;
+      localStorage.setItem('token', res.token);
+      getUserEmail(res.token);
+      setLoggedIn(true);
+      history.push('/');
     } catch {
       setIsInfoTooltipPopupOpen(true);
-      setIsRegistration(false);
-      window.addEventListener('keydown', handleEscClose);
+      setImageForInfoTooltip(RejectRegist);
+      setTextForInfoTooltip("Неверный Email или пароль");
     }
   }
 
@@ -210,13 +203,15 @@ function App({history}) {
     try{
       const res = await register(email, password);
       setIsInfoTooltipPopupOpen(true);
-      setIsRegistration(true);
-      window.addEventListener('keydown', handleEscClose);
-      history.push('/sign-in');
+      setImageForInfoTooltip(AcceptRegist);
+      setTextForInfoTooltip("Вы успешно зарегистрировались!");
+      setUserEmail(res.data.email);
+      setLoggedIn(true);
+      history.push('/')
     } catch {
       setIsInfoTooltipPopupOpen(true);
-      setIsRegistration(false);
-      window.addEventListener('keydown', handleEscClose);
+      setImageForInfoTooltip(RejectRegist);
+      setTextForInfoTooltip("Что-то пошло не так! Попробуйте ещё раз.");
     }
   }
 
@@ -269,15 +264,16 @@ function App({history}) {
           isOpen={isDeleteCardPopupOpen}
           onClose={closeAllPopups}
           onSubmit={handleCardDelete}
-          card={card}
+          card={cardToBeDeleted}
         />
 
         <ImagePopup 
           card = {selectedCard}
-          onClose = {() => setSelectCard({...selectedCard, isOpen: false})}
+          isOpen={isImagePopupOpen}
+          onClose = {closeAllPopups}
         />
 
-        <InfoTooltip name="info" isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} isRegistration={isRegistration} />
+        <InfoTooltip name="info" isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} image={imageForInfoTooltip} text={textForInfoTooltip} />
       </CurrentUserContext.Provider>
   );
 }

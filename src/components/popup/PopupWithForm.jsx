@@ -3,8 +3,21 @@ import React from "react";
 function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubmit, isValid}) {
   function handleCLoseOverlayClick(e) {
     if(e.target === e.currentTarget) {
-      onClose();
+      closePopup();
     }
+  }
+
+  if(isOpen) {
+    window.addEventListener('keydown', handleEscClose);
+  }
+  
+  function handleEscClose(e) {
+    e.key === "Escape" && closePopup();
+  }
+
+  function closePopup() {
+    window.removeEventListener('keydown', handleEscClose);
+    onClose();
   }
 
   return (
@@ -14,7 +27,7 @@ function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubm
     >
       <div className="popup__container">
         <button
-          onClick={onClose}
+          onClick={closePopup}
           type="button"
           className="button button_type_close"
           aria-label="Закрыть окно"
@@ -28,7 +41,7 @@ function PopupWithForm({name, title, titleBtn, isOpen, children, onClose, onSubm
             }`}
             value={titleBtn}
             id="button-save"
-            disabled={!isValid ? true : false}
+            disabled={!isValid}
           >
             {titleBtn}
           </button>

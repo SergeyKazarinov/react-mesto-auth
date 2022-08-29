@@ -1,12 +1,23 @@
 import React from "react";
-import AcceptRegist from '../../images/Accept-registration.png';
-import RejectRegist from '../../images/rejectRegistration.png'
 
-const InfoTooltip = ({name, isOpen, onClose, isRegistration }) => {
+const InfoTooltip = ({name, isOpen, onClose, image, text }) => {
   function handleCLoseOverlayClick(e) {
     if(e.target === e.currentTarget) {
-      onClose();
+      closePopup();
     }
+  }
+
+  if(isOpen) {
+    window.addEventListener('keydown', handleEscClose);
+  }
+  
+  function handleEscClose(e) {
+    e.key === "Escape" && closePopup();
+  }
+
+  function closePopup() {
+    window.removeEventListener('keydown', handleEscClose);
+    onClose();
   }
 
   return (
@@ -16,13 +27,13 @@ const InfoTooltip = ({name, isOpen, onClose, isRegistration }) => {
     >
       <div className="popup__container-info">
         <button
-          onClick={onClose}
+          onClick={closePopup}
           type="button"
           className="button button_type_close"
           aria-label="Закрыть окно"
         />
-        <img src={isRegistration ? AcceptRegist : RejectRegist} className="popup__union" alt="Значок галочки" />
-        <h2 className="popup__title-info">{isRegistration ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."}</h2>
+        <img src={image} className="popup__union" alt="Значок галочки" />
+        <h2 className="popup__title-info">{text}</h2>
       </div>
     </div>
   );

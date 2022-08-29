@@ -7,7 +7,7 @@ function Header({linkTitle, link, onSignOut, email, loggedIn}) {
   const [isButtonMenu, setIsButtonMenu] = useState(false);
 
   const handleMenuClick = () => {
-    setIsButtonMenu(!isButtonMenu);
+    setIsButtonMenu(state => !state);
   }
 
   return (
@@ -23,7 +23,11 @@ function Header({linkTitle, link, onSignOut, email, loggedIn}) {
           <Link to={link} className="link header__link" onClick={onSignOut}>{linkTitle}</Link>
         </div>
       
-        <button type="button" className={`header__button ${loggedIn && "header__button_type_loggedIn"} ${isButtonMenu && "header__button_opened"}`} onClick={handleMenuClick}>
+        <button 
+          type="button" 
+          className={`header__button ${loggedIn && "header__button_type_loggedIn"} ${isButtonMenu && "header__button_opened"}`} 
+          onClick={handleMenuClick}
+          >
           <img className="header__line" src={line} alt="Линия"/>
           <img className="header__line" src={line} alt="Линия"/>
           <img className="header__line" src={line} alt="Линия"/>

@@ -10,14 +10,8 @@
   z-index: 4;
   border: 0;
   cursor: pointer;
-  /* overflow: hidden; */
   visibility: visible;
   display: none;
-}
-
-.header__button:hover .header__line:nth-of-type(2) {
-  transform: translate(-10px, 0);
-  transition: transform, 0.4s;
 }
 
 @media screen and (max-width: 540px) {

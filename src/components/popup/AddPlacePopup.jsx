@@ -8,7 +8,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
   const [isLinkValid, setIsLinkValid] = useState (false);
   const [isNameValid, setIsNameValid] = useState (false);
   const [isButtonValid, setIsButtonValid] = useState (false);
-  const [buttonSubmitName, setButtonSubmitName] = useState('Создать')
+  const [buttonSubmitName, setButtonSubmitName] = useState('Создать');
 
   useEffect(() => {
     nameInputRef.current.value='';
@@ -51,36 +51,36 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
 
   return(
     <PopupWithForm 
-          name="add-image" 
-          title="Новое место" 
-          titleBtn={buttonSubmitName}
-          isOpen={isOpen}
-          onClose={onClose}
-          onSubmit={handleSubmit}
-          isValid={isButtonValid}
-        >
-          <FieldSet 
-            inputType="text"
-            inputClassType="place"
-            placeholder="Название"
-            id="input-name"
-            minLength="2"
-            maxLength="30"
-            inputRef={nameInputRef}
-            onChange={handleNameChange}
-            isOpen={isOpen}
-          />
+      name="add-image" 
+      title="Новое место" 
+      titleBtn={buttonSubmitName}
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      isValid={isButtonValid}
+    >
+      <FieldSet 
+        inputType="text"
+        inputClassType="place"
+        placeholder="Название"
+        id="input-name"
+        minLength="2"
+        maxLength="30"
+        inputRef={nameInputRef}
+        onChange={handleLinkChange}
+        isOpen={isOpen}
+      />
 
-          <FieldSet 
-            inputType="url"
-            inputClassType="link"
-            placeholder="Ссылка на картинку"
-            id="input-link"
-            inputRef={linkInputRef}
-            onChange={handleLinkChange}
-            isOpen={isOpen}
-          />
-        </PopupWithForm>
+      <FieldSet 
+        inputType="url"
+        inputClassType="link"
+        placeholder="Ссылка на картинку"
+        id="input-link"
+        inputRef={linkInputRef}
+        onChange={handleNameChange}
+        isOpen={isOpen}
+      />
+    </PopupWithForm>
   )
 }
 
