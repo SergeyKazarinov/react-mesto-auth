@@ -5,6 +5,18 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete}) {
   const currentUser = useContext(CurrentUserContext);
 
+  const cardElements = cards.map(card => (
+                                  <li key={card._id} className="card">
+                                    <Card 
+                                      key={card._id}
+                                      card={card}
+                                      onCardClick = {onCardClick}
+                                      onCardLike = {onCardLike}
+                                      onCardDelete = {onCardDelete}
+                                    />
+                                  </li>)
+                                )
+
   return (
     <main className="containt">
       <section className="profile">
@@ -43,15 +55,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCa
       </section>
       <section className="elements">
         <ul className="elements__grid list">
-          {cards.map(card => (
-            <Card 
-            key={card._id}
-            card={card}
-            onCardClick = {onCardClick}
-            onCardLike = {onCardLike}
-            onCardDelete = {onCardDelete}
-            />)
-          )}
+          {cardElements}
       </ul>
     </section>
   </main>

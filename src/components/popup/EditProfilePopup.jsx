@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from "react";
+import Popup from "./Popup";
 import PopupWithForm from "./PopupWithForm";
 import FieldSet from "../Fieldset";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
@@ -10,9 +11,9 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   const [isAboutValid, setIsAboutValid] = useState (false);
   const [isNameValid, setIsNameValid] = useState (false);
   const [isButtonValid, setIsButtonValid] = useState (false);
-  const [buttonSubmitName, setButtonSubmitName] = useState('Сохранить')
+  const [buttonSubmitName, setButtonSubmitName] = useState('Сохранить');
 
-  React.useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
     setIsAboutValid(true);
@@ -54,39 +55,44 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   }, [isNameValid, isAboutValid])
 
   return(
-    <PopupWithForm 
-      name="edit-profile" 
-      title="Редактировать профиль" 
-      titleBtn={buttonSubmitName}
+    <Popup 
+      name="edit-profile"
+      nameContainer="popup__container"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}
-      isValid={isButtonValid}
-      >
-      <FieldSet 
-        inputType="text"
-        inputClassType="name"
-        placeholder="Ваше имя"
-        id="input-title"
-        minLength="2"
-        maxLength="40"
-        value={name}
-        onChange={handleNameChange}
-        isOpen={isOpen}
-      />
+    >
+      <PopupWithForm 
+        name="edit-profile" 
+        title="Редактировать профиль" 
+        titleBtn={buttonSubmitName}
+        onSubmit={handleSubmit}
+        isValid={isButtonValid}
+        >
+        <FieldSet 
+          inputType="text"
+          inputClassType="name"
+          placeholder="Ваше имя"
+          id="input-title"
+          minLength="2"
+          maxLength="40"
+          value={name}
+          onChange={handleNameChange}
+          isOpen={isOpen}
+        />
 
-      <FieldSet 
-        inputType="text"
-        inputClassType="job"
-        placeholder="Информация о работе"
-        id="input-job"
-        minLength="2"
-        maxLength="200"
-        value={description}
-        onChange={handleDescriptionChange}
-        isOpen={isOpen}
-      />
-    </PopupWithForm>
+        <FieldSet 
+          inputType="text"
+          inputClassType="job"
+          placeholder="Информация о работе"
+          id="input-job"
+          minLength="2"
+          maxLength="200"
+          value={description}
+          onChange={handleDescriptionChange}
+          isOpen={isOpen}
+        />
+      </PopupWithForm>
+    </Popup>
   )
 }
 

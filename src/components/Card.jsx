@@ -27,7 +27,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
 
   return (
-    <li className="card">
+    <>
       <button
         className="button button_type_card"
         type="button"
@@ -56,7 +56,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
           <span className="card__like-item">{card.likes.length}</span>
         </div>
       </div>
-    </li>
+    </>
   );
 }
 
