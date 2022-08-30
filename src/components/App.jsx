@@ -9,7 +9,8 @@ import EditProfilePopup from './popup/EditProfilePopup';
 import EditAvatarPopup from './popup/EditAvatarPopup'
 import AddPlacePopup from "./popup/AddPlacePopup";
 import DeleteCardPopup from "./popup/DeleteCardPopup";
-import ImagePopup from "./popup/ImagePopup";
+import Popup from "./popup/Popup";
+import PopupWithImage from "./popup/PopupWithImage";
 import ProtectedRoute from "./ProtectedRoute";
 import Register from './Register';
 import Login from './Login';
@@ -17,6 +18,7 @@ import InfoTooltip from './popup/InfoTooltip';
 import { getUserData, authorize, register } from "../utils/auth";
 import AcceptRegist from '../images/Accept-registration.png';
 import RejectRegist from '../images/rejectRegistration.png'
+
 
 function App({history}) {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -267,13 +269,28 @@ function App({history}) {
           card={cardToBeDeleted}
         />
 
-        <ImagePopup 
-          card = {selectedCard}
+        <Popup
+          name="image-zoom"
+          nameContainer="popup__container-image"
           isOpen={isImagePopupOpen}
           onClose = {closeAllPopups}
-        />
-
-        <InfoTooltip name="info" isOpen={isInfoTooltipPopupOpen} onClose={closeAllPopups} image={imageForInfoTooltip} text={textForInfoTooltip} />
+        >
+          <PopupWithImage 
+            card={selectedCard} 
+          />
+        </Popup>
+        
+        <Popup
+          name="info"
+          nameContainer="popup__container-info"
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+        >
+          <InfoTooltip 
+            image={imageForInfoTooltip}
+            text={textForInfoTooltip}
+          />
+        </Popup>
       </CurrentUserContext.Provider>
   );
 }

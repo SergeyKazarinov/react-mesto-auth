@@ -1,38 +1,43 @@
 import React, {useState, useEffect} from "react";
 
 const useFormValidation = (theFirstInput, theSecondInput) => {
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isTheFirstValid, setIsTheFirstValid] = useState(false);
+  const [isTheSecondValid, setIsTheSecondValid] = useState(false);
   const [isButtonValid, setIsButtonValid] = useState(false);
 
   function handleTheFirstInputChange() {
     if(theFirstInput.current.validity.valid) {
-      setIsEmailValid(true);
+      setIsTheFirstValid(true);
     }
     else {
-      setIsEmailValid(false);
+      setIsTheFirstValid(false);
     }
   }
 
   function handleTheSecondInputChange() {
     if(theSecondInput.current.validity.valid) {
-      setIsPasswordValid(true);
+      setIsTheSecondValid(true);
     }
     else {
-      setIsPasswordValid(false);
+      setIsTheSecondValid(false);
     }
   }
 
   function resetValid() {
-    setIsEmailValid(false);
-    setIsPasswordValid(false);
+    setIsTheFirstValid(false);
+    setIsTheSecondValid(false);
+  }
+
+  function activeValid() {
+    setIsTheFirstValid(true);
+    setIsTheSecondValid(true);
   }
 
   useEffect(() => {
-    setIsButtonValid(isEmailValid && isPasswordValid);
-  }, [isEmailValid, isPasswordValid])
+    setIsButtonValid(isTheFirstValid && isTheSecondValid);
+  }, [isTheFirstValid, isTheSecondValid])
   
-  return {isButtonValid, handleTheFirstInputChange, handleTheSecondInputChange, resetValid};
+  return {isButtonValid, handleTheFirstInputChange, handleTheSecondInputChange, resetValid, activeValid};
 }
 
 export default useFormValidation;

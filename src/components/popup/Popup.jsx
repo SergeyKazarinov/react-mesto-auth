@@ -1,6 +1,6 @@
 import React from "react";
 
-function ImagePopup({card, isOpen, onClose}) {
+function Popup({name, nameContainer, isOpen, onClose, children}) {
   function handleCLoseOverlayClick(e) {
     if(e.target === e.currentTarget) {
       closePopup();
@@ -20,24 +20,22 @@ function ImagePopup({card, isOpen, onClose}) {
     onClose();
   }
 
-  return(
-    <div className={`popup popup_type_image-zoom ${isOpen ? 'popup_opened' : ''}`} onClick={handleCLoseOverlayClick}>
-      <div className="popup__container-image">
-        <button 
+  return (
+    <div
+      className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}
+      onMouseDown={handleCLoseOverlayClick}
+    >
+      <div className={nameContainer}>
+        <button
+          onClick={closePopup}
           type="button"
           className="button button_type_close"
           aria-label="Закрыть окно"
-          onClick={closePopup}
-        >
-        </button>
-        <img 
-          className="popup__image"
-          src={card.link}
-          alt={card.name}
         />
-        <h2 className="popup__text">{card.name}</h2>
+        {children}
       </div>
     </div>
   );
 }
-export default ImagePopup;
+
+export default Popup;
