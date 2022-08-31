@@ -15,8 +15,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './popup/InfoTooltip';
-import { getUserData, authorize, register } from "../utils/auth.js";
-import AcceptRegist from '../images/Accept-registration.png';
+import { getUserData, authorize, register } from "../utils/123"; // На самом деле странно, что на gitHub он не 
+import AcceptRegist from '../images/Accept-registration.png';     // запушился измененный, поскольку я переименовал файл после первой итерации
 import RejectRegist from '../images/rejectRegistration.png'
 
 
