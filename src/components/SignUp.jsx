@@ -49,7 +49,7 @@ const SignUp = ({title, titleBtn, isLogin, onSubmit }) => {
           id="button-save"
           disabled={!isButtonValid}
         >
-        {titleBtn}
+          {titleBtn}
         </button>
         {!isLogin && <p className="sign-up__description">Уже зарегистрированы? <Link to="/sign-in" className="link">Войти</Link></p>}
       </form>

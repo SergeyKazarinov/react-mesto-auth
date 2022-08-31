@@ -15,7 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './popup/InfoTooltip';
-import { getUserData, authorize, register } from "../utils/auth";
+import { getUserData, authorize, register } from "../utils/auth.js";
 import AcceptRegist from '../images/Accept-registration.png';
 import RejectRegist from '../images/rejectRegistration.png'
 
@@ -191,7 +191,7 @@ function App({history}) {
     try{
       const res = await authorize(email, password);
       localStorage.setItem('token', res.token);
-      getUserEmail(res.token);
+      setUserEmail(email);
       setLoggedIn(true);
       history.push('/');
     } catch {
@@ -207,7 +207,7 @@ function App({history}) {
       setIsInfoTooltipPopupOpen(true);
       setImageForInfoTooltip(AcceptRegist);
       setTextForInfoTooltip("Вы успешно зарегистрировались!");
-      setUserEmail(res.data.email);
+      handleSignIn(email, password);
       setLoggedIn(true);
       history.push('/')
     } catch {

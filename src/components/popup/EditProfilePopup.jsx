@@ -51,7 +51,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   }
 
   useEffect(() => {
-      setIsButtonValid(isAboutValid && isNameValid);
+    setIsButtonValid(isAboutValid && isNameValid);
   }, [isNameValid, isAboutValid])
 
   return(
