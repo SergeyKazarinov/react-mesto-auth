@@ -56,9 +56,9 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCa
       <section className="elements">
         <ul className="elements__grid list">
           {cardElements}
-      </ul>
-    </section>
-  </main>
+        </ul>
+      </section>
+    </main>
   );
 }
 export default Main;
