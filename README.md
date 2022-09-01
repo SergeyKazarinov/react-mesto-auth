@@ -1,12 +1,6 @@
 # Проект: Mesto-react
 
-<table >
-  <tr >
-    <td width="100%">
-      <img src="https://github.com/SergeyKazarinov/react-mesto-auth/tree/main/src/images/Mesto.gif" width="100%">
-    </td>
-  </tr>
-</table>
+<img src="https://github.com/SergeyKazarinov/react-mesto-auth/blob/main/src/images/Mesto.gif" width="50%">
 
 Переписанное приложение Mesto на React [Ссылка на предыдущий проект](https://github.com/SergeyKazarinov/mesto)
 Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки с возможностью авторизации и регистрации пользователя.
