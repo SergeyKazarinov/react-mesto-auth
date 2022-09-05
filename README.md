@@ -17,6 +17,9 @@
 - Подключить базу данных
 - Развернуть проект в облаке
 
+**GitHup Pages**
+* [Ссылка на проект](https://sergeykazarinov.github.io/react-mesto-auth/#/sign-in)
+
 ## Быстрый старт
 
 <br />
